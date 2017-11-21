@@ -13,6 +13,8 @@
     <string name="pref_temp_unit_key">Tempunit</string>
     <string name="pref_temp_unit_label">Temperature units</string>
     <string name="pref_temp_unit_dialog_title">Temperature Units</string>
+    <string name="pref_temp_unit_system_metric">Metric</string>
+    <string name="pref_temp_unit_system_imperial">Imperial</string>
     <string name="pref_temp_unit_metric">Celsius</string>
     <string name="pref_temp_unit_imperial">Fahrenheit</string>
 </resources>
