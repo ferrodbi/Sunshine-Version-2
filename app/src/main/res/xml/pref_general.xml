@@ -20,8 +20,6 @@
             android:defaultValue="@string/pref_temp_unit_metric"
             />
 
-
-
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -7,9 +7,12 @@
     <string name="action_refresh" translatable="false">Refresh</string>
     <string name="title_activity_settings" translatable="false">Settings</string>
     <string name="dialog_based_preferences">Settings</string>
+    <!-- Location related strings on preference menu -->
     <string name="pref_location_label">Location</string>
     <string name="pref_location_key">location</string>
     <string name="pref_location_default">46195,es</string>
+    <string name="action_map">Show location on map</string>
+    <!-- Temperature unit related strings on preference menu -->
     <string name="pref_temp_unit_key">Tempunit</string>
     <string name="pref_temp_unit_label">Temperature units</string>
     <string name="pref_temp_unit_dialog_title">Temperature Units</string>
