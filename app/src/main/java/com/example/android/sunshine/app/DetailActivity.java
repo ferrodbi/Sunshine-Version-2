@@ -24,6 +24,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class DetailActivity extends ActionBarActivity {
     }
 
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.detailfragment, menu);
@@ -59,7 +60,7 @@ public class DetailActivity extends ActionBarActivity {
             Log.d(LOG_TAG, "Share action provider is null");
         }
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -83,7 +84,7 @@ public class DetailActivity extends ActionBarActivity {
     public static class DetailFragment extends Fragment {
 
         private static final String LOG_TAG = DetailFragment.class.getSimpleName();
-        private static final String FORECAST_SHARING_HASHTAG = "#SunshineApp";
+        private static final String FORECAST_SHARING_HASHTAG = " #SunshineApp";
         private String mForecastStr;
 
         public DetailFragment() {
@@ -100,6 +101,22 @@ public class DetailActivity extends ActionBarActivity {
                 ((TextView) rootView.findViewById(R.id.detail_text)).setText(mForecastStr);
             }
             return rootView;
+        }
+
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            inflater.inflate(R.menu.detailfragment, menu);
+            MenuItem menuItem = menu.findItem(R.id.action_share);
+            android.support.v7.widget.ShareActionProvider mShareActionProvider =
+                    (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+            if (mShareActionProvider != null) {
+                mShareActionProvider.setShareIntent(
+                        createShareForecastIntent());
+
+            } else {
+                Log.d(LOG_TAG, "Share action provider is null");
+            }
         }
 
         private Intent createShareForecastIntent(){
