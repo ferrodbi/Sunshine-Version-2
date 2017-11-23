@@ -16,6 +16,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(LOG_TAG, "OnCreate lifecycle event triggered");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
@@ -30,6 +31,41 @@ public class MainActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d(LOG_TAG, "OnDestroy lifecycle event triggered");
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d(LOG_TAG, "OnResume lifecycle event triggered");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(LOG_TAG, "OnPause lifecycle event triggered");
+        super.onPause();
+    }
+
+    @Override
+    protected void onPostResume() {
+        Log.d(LOG_TAG, "OnPostResume lifecycle event triggered");
+        super.onPostResume();
+    }
+
+    @Override
+    protected void onStart(){
+        Log.d(LOG_TAG, "OnStart lifecycle event triggered");
+        super.onStart();
+    }
+    @Override
+    protected void onStop() {
+        Log.d(LOG_TAG, "OnStop lifecycle event triggered");
+        super.onStop();
     }
 
     @Override
