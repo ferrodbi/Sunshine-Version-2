@@ -1,10 +1,14 @@
 package com.example.android.sunshine.app;
 
+import android.app.LoaderManager;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
+import android.support.v4.content.CursorLoader;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,16 +25,37 @@ import com.example.android.sunshine.app.data.WeatherContract;
  * Created by who on 11/15/17.
  * A Forecast fragment containing a simple view.
  */
-public class ForecastFragment extends android.support.v4.app.Fragment {
+public class ForecastFragment extends android.support.v4.app.Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    private static final int FORECAST_LOADER = 0;
     private ForecastAdapter mForecastAdapter;
+    private CursorLoader cursorLoader;
 
     public ForecastFragment() {
+    }
+
+    ;
+
+    Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return new android.content.CursorLoader(getActivity(), null, null, null, null, null);
+    }
+
+    ;
+
+    void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        cursorAdapter.swapCursor(cursor);
+    }
+
+    ;
+
+    void onLoadReset(Loader<Cursor> cursorLoader) {
+        cursorAdapter.swapCursor(null);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        cursorLoader = new CursorLoader(getActivity(), )
     }
 
     @Override
@@ -50,6 +75,12 @@ public class ForecastFragment extends android.support.v4.app.Fragment {
     public void onStart() {
         super.onStart();
         updateWeather();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getLoaderManager().initLoader(FORECAST_LOADER, bundle, callback);
     }
 
     @Override
