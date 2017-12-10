@@ -3,6 +3,7 @@ package com.example.android.sunshine.app;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.example.android.sunshine.app.data.WeatherContract;
  * from a {@link android.database.Cursor} to a {@link android.widget.ListView}.
  */
 public class ForecastAdapter extends CursorAdapter {
+    private static final String LOG_TAG = ForecastAdapter.class.getSimpleName();
     public ForecastAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }
@@ -25,6 +27,7 @@ public class ForecastAdapter extends CursorAdapter {
     private String formatHighLows(double high, double low) {
         boolean isMetric = Utility.isMetric(mContext);
         String highLowStr = Utility.formatTemperature(high, isMetric) + "/" + Utility.formatTemperature(low, isMetric);
+        Log.d(LOG_TAG, "highLowStr: " + highLowStr + " high: " + high + " low: " + low);
         return highLowStr;
     }
 

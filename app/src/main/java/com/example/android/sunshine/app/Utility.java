@@ -18,11 +18,14 @@ package com.example.android.sunshine.app;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.text.DateFormat;
 import java.util.Date;
 
 public class Utility {
+    private static final String LOG_TAG = Utility.class.getSimpleName();
+
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(context.getString(R.string.pref_location_key),
