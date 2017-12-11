@@ -18,7 +18,6 @@ package com.example.android.sunshine.app;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -34,6 +33,11 @@ public class Utility {
 
     public static boolean isMetric(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+//        String s1 = prefs.getString(context.getString(R.string.pref_temp_unit_key),
+//                context.getString(R.string.pref_temp_unit_system_metric));
+//        String s2 = context.getString(R.string.pref_temp_unit_system_metric);
+//        Log.d(LOG_TAG, "s1 = " + s1 + " s2 = " + s2 + " Is it metric? "
+//                + s1.equals(s2));
         return prefs.getString(context.getString(R.string.pref_temp_unit_key),
                 context.getString(R.string.pref_temp_unit_system_metric))
                 .equals(context.getString(R.string.pref_temp_unit_system_metric));

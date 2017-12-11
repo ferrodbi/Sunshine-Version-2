@@ -113,12 +113,12 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         weatherTask.execute(location);
     }
 
-    @Override
-    public void onStart() {
-        Log.d(LOG_TAG, "onStart method called");
-        super.onStart();
-        updateWeather();
-    }
+//    @Override
+//    public void onStart() {
+//        Log.d(LOG_TAG, "onStart method called");
+//        super.onStart();
+//        updateWeather();
+//    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -153,6 +153,11 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         });
 
         return rootView;
+    }
+
+    public void onLocationChanged() {
+        updateWeather();
+        getLoaderManager().restartLoader(FORECAST_LOADER, null, this);
     }
 }
 
