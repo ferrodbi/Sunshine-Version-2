@@ -16,15 +16,17 @@
 
 package com.example.android.sunshine.app;
 
-import android.app.LoaderManager;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,10 +34,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.example.android.sunshine.app.data.WeatherContract;
+
+//import android.widget.ShareActionProvider;
 
 public class DetailActivity extends ActionBarActivity {
     private static final String LOG_TAG = DetailActivity.class.getSimpleName();
@@ -87,7 +90,7 @@ public class DetailActivity extends ActionBarActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class DetailFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    public static class DetailFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
         private static final String LOG_TAG = DetailFragment.class.getSimpleName();
         private static final String FORECAST_SHARING_HASHTAG = " #SunshineApp";
@@ -115,12 +118,13 @@ public class DetailActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            Intent intent = getActivity().getIntent();
-            View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-            if (intent != null) {
-                mForecast = intent.getDataString();
-            }
-            return rootView;
+//            Intent intent = getActivity().getIntent();
+//            View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+//            if (intent != null) {
+//                mForecast = intent.getDataString();
+//            }
+//            return rootView;
+            return inflater.inflate(R.layout.fragment_detail, container, false);
         }
 
         @Override
@@ -128,12 +132,10 @@ public class DetailActivity extends ActionBarActivity {
             // Inflate the menu; this adds items to the action bar if it is present.
             inflater.inflate(R.menu.detailfragment, menu);
             MenuItem menuItem = menu.findItem(R.id.action_share);
-            android.support.v7.widget.ShareActionProvider mShareActionProvider =
-                    (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-            mShareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+            mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+            //mShareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
             if (mForecast != null) {
-                mShareActionProvider.setShareIntent(
-                        createShareForecastIntent());
+                mShareActionProvider.setShareIntent(createShareForecastIntent());
 
             } else {
                 Log.d(LOG_TAG, "Share action provider is null");
@@ -149,6 +151,13 @@ public class DetailActivity extends ActionBarActivity {
         }
 
         @Override
+        public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+            getLoaderManager().initLoader(DETAIL_LOADER, null, this);
+            super.onActivityCreated(savedInstanceState);
+        }
+
+
+        @Override
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             Log.v(LOG_TAG, "In onCreateLoader");
             Intent intent = getActivity().getIntent();
@@ -157,6 +166,7 @@ public class DetailActivity extends ActionBarActivity {
             }
             return new CursorLoader(getActivity(), intent.getData(), FORECAST_COLUMNS, null, null, null);
         }
+
 
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
