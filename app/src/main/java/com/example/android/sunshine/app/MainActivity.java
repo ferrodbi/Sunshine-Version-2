@@ -19,6 +19,7 @@ public class MainActivity extends ActionBarActivity {
         Log.d(LOG_TAG, "OnCreate lifecycle event triggered");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PreferenceManager.setDefaultValues(this, R.xml.pref_general, true);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new ForecastFragment())
