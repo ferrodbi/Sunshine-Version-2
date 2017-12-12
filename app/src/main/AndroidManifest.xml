@@ -27,12 +27,14 @@
             android:authorities="com.example.android.sunshine.app"
             android:enabled="true"
             android:exported="true"
-            android:permisson="com.myapp.SUNSHINE_LICENSE"
+            android:permission="com.myapp.SUNSHINE_LICENSE"
             />
 
     </application>
-    <permisson
+    <permission
         android:name="com.myapp.SUNSHINE_LICENSE"
         android:label="Licensed to Kill"
-        android:protectionLevel="dangerous"></permisson>
+        android:protectionLevel="dangerous">
+
+    </permission>
 </manifest>
