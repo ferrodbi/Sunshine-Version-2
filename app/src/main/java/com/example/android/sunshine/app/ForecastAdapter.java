@@ -35,34 +35,6 @@ public class ForecastAdapter extends CursorAdapter {
         return 2;
     }
 
-    /**
-     * Prepare the weather high/lows for presentation.
-     */
-    private String formatHighLows(double high, double low) {
-        boolean isMetric = Utility.isMetric(mContext);
-        String highLowStr = Utility.formatTemperature(high, isMetric) + "/" + Utility.formatTemperature(low, isMetric);
-        Log.d(LOG_TAG, "highLowStr: " + highLowStr + " high: " + high + " low: " + low);
-        return highLowStr;
-    }
-
-    /*
-        This is ported from FetchWeatherTask --- but now we go straight from the cursor to the
-        string.
-     */
-    private String convertCursorRowToUXFormat(Cursor cursor) {
-        //NEEDS TO BE MODIFIED ON 7.9
-        // get row indices for our cursor
-
-
-        String highAndLow = formatHighLows(
-                cursor.getDouble(ForecastFragment.COL_WEATHER_MAX_TEMP),
-                cursor.getDouble(ForecastFragment.COL_WEATHER_MIN_TEMP));
-
-        return Utility.formatDate(cursor.getLong(ForecastFragment.COL_WEATHER_DATE)) +
-                " - " + cursor.getString(ForecastFragment.COL_WEATHER_DESC) +
-                " - " + highAndLow;
-    }
-
     /*
         Remember that these views are reused as needed.
      */
@@ -70,7 +42,7 @@ public class ForecastAdapter extends CursorAdapter {
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         // Choose the layout type
         int viewType = getItemViewType(cursor.getPosition());
-        int layoutID = getItemViewType(viewType);
+        int layoutID = -1;
         if (viewType == VIEW_TYPE_TODAY) {
             layoutID = R.layout.list_item_forecast_today;
         } else {
