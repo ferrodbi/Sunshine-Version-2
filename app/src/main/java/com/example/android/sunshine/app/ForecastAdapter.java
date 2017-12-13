@@ -57,8 +57,8 @@ public class ForecastAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder viewHolder = (ViewHolder) view.getTag();
-        //Use placeholder image for now
-        viewHolder.iconView.setImageResource(R.drawable.ic_launcher);
+        //Use placeholder image for now TODO change it to the appropiate icon
+        viewHolder.iconView.setImageResource(R.mipmap.ic_launcher);
         // Read date from cursor
         //String date = cursor.getString(ForecastFragment.COL_WEATHER_DATE);
         long date = cursor.getLong(ForecastFragment.COL_WEATHER_DATE);
