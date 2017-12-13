@@ -136,8 +136,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         Context context = getActivity();
         if (data != null && data.moveToFirst()) {
             int weatherId = data.getInt(COL_WEATHER_CONDITION_ID);
-            // Using placeholder Image for now TODO change this to the appropiate icon
-            mIconView.setImageResource(R.mipmap.ic_launcher);
+            //int weatherId = data.getInt(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID));
+            // Using appropriate icon
+            int icon = Utility.getArtResourceForWeatherCondition(weatherId);
+            mIconView.setImageResource(icon);
             // Read parameters from cursor and updating view
             long date = data.getLong(COL_WEATHER_DATE);
             String friendlyDateText = Utility.getDayName(context, date);
