@@ -24,7 +24,6 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         mLocation = Utility.getPreferredLocation(this);
         setContentView(R.layout.activity_main);
         PreferenceManager.setDefaultValues(this, R.xml.pref_general, true);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (findViewById(R.id.weather_detail_container) != null) {
             mTwoPane = true;
             if (savedInstanceState == null) {
