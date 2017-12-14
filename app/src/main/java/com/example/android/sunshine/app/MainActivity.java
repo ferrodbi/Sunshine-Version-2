@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         Log.d(LOG_TAG, "OnResume lifecycle event triggered");
         super.onResume();
         String location = Utility.getPreferredLocation(this);
-        if (location != null && !location.equals(location)) {
+        if (location != null && !location.equals(mLocation)) {
             ForecastFragment ff = (ForecastFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_forecast);
             if (ff != null) {
                 ff.onLocationChanged();
